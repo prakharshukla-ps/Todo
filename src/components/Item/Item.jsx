@@ -18,7 +18,7 @@ export default function Item({ item, onDeleteItem, onCheckBox }) {
       <Button btn={<FcEditImage size={30} />} />
       <Button
         btn={<FcFullTrash size={30} />}
-        btnFunction={() => onDeleteItem(item.id)}
+        btnfunction={() => onDeleteItem(item.id)}
       />
     </li>
   );

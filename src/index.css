@@ -6,6 +6,7 @@
   margin: auto;
   font-family: "Merriweather", serif;
   display: grid;
+  grid-template-columns: 2fr 1fr;
 }
 
 .form {
@@ -29,3 +30,7 @@
   background-color: #5c8089;
   color: #fff;
 }
+
+/* .side {
+  width: 10rem;
+} */

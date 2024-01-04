@@ -29,6 +29,11 @@ export default function Home() {
 
   function handleDeleteItem(id) {
     setItems((items) => items.filter((item) => item.id !== id));
+    items.forEach((item) =>
+      setSideItems((sideItems) =>
+        sideItems.filter((siitem) => item.input === siitem)
+      )
+    );
   }
 
   function handleCheckBox(id) {
@@ -39,13 +44,10 @@ export default function Home() {
     );
   }
 
-  // function handleDeleteItem(id) {
-  //   setItems((items) => items.filter((item) => item.id !== id));
-  // }
-  // function handleDeleteSelected() {
-  //   setItems((items) => items.filter((item) => sideItems.includes(item.input)));
-  //   console.log(items);
-  // }
+  function handleCheckDelete(sidearr) {
+    setItems((items) => items.filter((item) => !sidearr.includes(item.input)));
+    setSideItems([]);
+  }
 
   useEffect(() => {
     if (items.length) {
@@ -67,36 +69,40 @@ export default function Home() {
 
   return (
     <div className="container">
-      <Text
-        fontColor={"#665743"}
-        weight={"bolder"}
-        size={"2rem"}
-        font={"Merriweather"}
-      >
-        TODO App
-      </Text>
-      <form className="form" onSubmit={handleSubmit}>
-        <Input input={input} handleInput={setInput} />
-        <Button btn={"ADD"} />
-      </form>
-      <List
-        items={items}
-        renderItem={(item) => (
-          <Item
-            item={item}
-            key={item.id}
-            onCheckBox={handleCheckBox}
-            onDeleteItem={handleDeleteItem}
-          />
-        )}
-      />
-      {sideItems.length ? (
-        <DeleteSelected
-          side={sideItems}
+      <div>
+        <Text
+          fontColor={"#665743"}
+          weight={"bolder"}
+          size={"2rem"}
+          font={"Merriweather"}
+        >
+          TODO App
+        </Text>
+        <form className="form" onSubmit={handleSubmit}>
+          <Input input={input} handleInput={setInput} />
+          <Button btn={"ADD"} />
+        </form>
+        <List
           items={items}
-          // onDeleteSelected={handleDeleteSelected}
+          renderItem={(item) => (
+            <Item
+              item={item}
+              key={item.id}
+              onCheckBox={handleCheckBox}
+              onDeleteItem={handleDeleteItem}
+            />
+          )}
         />
-      ) : null}
+      </div>
+      <div>
+        {sideItems.length ? (
+          <DeleteSelected
+            side={sideItems}
+            items={items}
+            handlecheckdelete={handleCheckDelete}
+          />
+        ) : null}
+      </div>
     </div>
   );
 }
