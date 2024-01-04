@@ -1,0 +1,6 @@
+.lists ul {
+  margin-left: 0;
+  height: 25rem;
+  overflow-y: scroll;
+  list-style: none;
+}

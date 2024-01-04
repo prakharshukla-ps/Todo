@@ -1,0 +1,28 @@
+.item {
+  display: flex;
+  margin: 1rem;
+  margin-left: -1.2rem;
+  padding: 0rem 1rem;
+  height: 3rem;
+  cursor: pointer;
+  align-items: center;
+  border-radius: 1rem;
+  box-shadow: 1px 1px 5px 5px rgb(233, 228, 220);
+  transition: box-shadow 0.4s ease-in;
+}
+
+.item:hover {
+  box-shadow: 1px 1px 2px 2px rgb(233, 228, 220);
+}
+
+.item span {
+  width: 22rem;
+  margin: 0rem 2rem;
+}
+
+.item button {
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  margin-left: 1rem;
+}
