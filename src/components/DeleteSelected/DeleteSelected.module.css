@@ -1,9 +1,10 @@
 .side {
-  width: 20rem;
+  width: 17rem;
   margin-top: 13rem;
   margin-left: 2rem;
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
 }
 
 .side p {
@@ -14,6 +15,10 @@
 }
 
 button {
-  background-color: transparent;
+  cursor: pointer;
+  padding: 1rem 1.5rem;
+  border-radius: 1rem;
   border: none;
+  background-color: #5c8089;
+  color: #fff;
 }

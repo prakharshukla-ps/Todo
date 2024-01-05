@@ -29,10 +29,19 @@ export default function Home() {
 
   function handleDeleteItem(id) {
     setItems((items) => items.filter((item) => item.id !== id));
+
     items.forEach((item) =>
       setSideItems((sideItems) =>
         sideItems.filter((siitem) => item.input === siitem)
       )
+    );
+  }
+
+  function handleUpdate(e) {
+    e.target.parentElement.parentElement.parentElement.parentElement.parentElement.previousElementSibling.children[0].focus();
+    console.log(
+      e.target.parentElement.parentElement.parentElement.parentElement
+        .parentElement.previousElementSibling.children[0]
     );
   }
 
@@ -64,6 +73,8 @@ export default function Home() {
                 : sideItems
             )
       );
+    } else {
+      setSideItems([]);
     }
   }, [items]);
 
@@ -80,7 +91,7 @@ export default function Home() {
         </Text>
         <form className="form" onSubmit={handleSubmit}>
           <Input input={input} handleInput={setInput} />
-          <Button btn={"ADD"} />
+          <Button btn={"ADD"} styleClass="itemBtn" />
         </form>
         <List
           items={items}
@@ -90,6 +101,7 @@ export default function Home() {
               key={item.id}
               onCheckBox={handleCheckBox}
               onDeleteItem={handleDeleteItem}
+              onUpdate={handleUpdate}
             />
           )}
         />

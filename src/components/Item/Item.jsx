@@ -3,7 +3,7 @@ import styles from "./Item.module.css";
 import { FcEditImage } from "react-icons/fc";
 import { FcFullTrash } from "react-icons/fc";
 
-export default function Item({ item, onDeleteItem, onCheckBox }) {
+export default function Item({ item, onDeleteItem, onCheckBox, onUpdate }) {
   return (
     <li className={styles.item}>
       <input
@@ -15,7 +15,10 @@ export default function Item({ item, onDeleteItem, onCheckBox }) {
         }}
       />
       <span>{item.input}</span>
-      <Button btn={<FcEditImage size={30} />} />
+      <Button
+        btn={<FcEditImage size={30} />}
+        btnfunction={(e) => onUpdate(e)}
+      />
       <Button
         btn={<FcFullTrash size={30} />}
         btnfunction={() => onDeleteItem(item.id)}
