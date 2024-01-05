@@ -8,7 +8,12 @@ export default function DeleteSelected({ side, handlecheckdelete }) {
         {side.map((item) => (
           <p key={item}>{item} </p>
         ))}
-        <Button btn="DELETE ALL" btnfunction={() => handlecheckdelete(side)} />
+        <Button
+          styleClass="deleteSelectedBtn"
+          varColor="delete"
+          btn="DELETE ALL"
+          btnfunction={() => handlecheckdelete(side)}
+        />
       </div>
     </>
   );

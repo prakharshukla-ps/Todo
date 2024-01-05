@@ -1,17 +1,25 @@
 import { useState } from "react";
+import { useEffect } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import Input from "../components/Input/input";
 import List from "../components/List/List";
 import Item from "../components/Item/Item";
 import Button from "../components/Button/Button";
 import Text from "./../components/Text/Text";
+
 import DeleteSelected from "../components/DeleteSelected/DeleteSelected";
-import { useEffect } from "react";
 
 export default function Home() {
   const [input, setInput] = useState("");
   const [items, setItems] = useState([]);
   const [sideItems, setSideItems] = useState([]);
   const [updateItem, setUpdateItem] = useState("");
+
+  function notify(item) {
+    toast.error(`${item} already added`);
+  }
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -31,7 +39,15 @@ export default function Home() {
   }
 
   function handleAddItems(item) {
-    setItems((items) => [item, ...items]);
+    setItems((items) => {
+      if (items.findIndex((el) => el.input === item.input) === -1) {
+        items = [item, ...items];
+      } else {
+        notify(item.input);
+      }
+
+      return items;
+    });
   }
 
   function handleDeleteItem(id) {
@@ -97,45 +113,50 @@ export default function Home() {
   }, [items]);
 
   return (
-    <div className="container">
+    <>
       <div>
-        <Text
-          fontColor={"#665743"}
-          weight={"bolder"}
-          size={"2rem"}
-          font={"Merriweather"}
-        >
-          TODO App
-        </Text>
-        <form className="form" onSubmit={handleSubmit}>
-          <Input input={input} handleInput={setInput} />
-          <Button btn={"ADD"} styleClass="itemBtn" />
-        </form>
-        <List
-          items={items}
-          renderItem={(item) => (
-            <Item
-              item={item}
-              key={item.id}
-              update={item.update}
-              updateItem={updateItem}
-              setUpdateItem={setUpdateItem}
-              onCheckBox={handleCheckBox}
-              onDeleteItem={handleDeleteItem}
-              onUpdate={handleUpdate}
-            />
-          )}
-        />
+        <ToastContainer />
       </div>
-      <div>
-        {sideItems.length ? (
-          <DeleteSelected
-            side={sideItems}
+      <div className="container">
+        <div>
+          <Text
+            fontColor={"#665743"}
+            weight={"bolder"}
+            size={"2rem"}
+            font={"Merriweather"}
+          >
+            TODO App
+          </Text>
+          <form className="form" onSubmit={handleSubmit}>
+            <Input input={input} handleInput={setInput} />
+            <Button btn={"ADD"} styleClass="itemBtn" />
+          </form>
+          <List
             items={items}
-            handlecheckdelete={handleCheckDelete}
+            renderItem={(item) => (
+              <Item
+                item={item}
+                key={item.id}
+                update={item.update}
+                updateItem={updateItem}
+                setUpdateItem={setUpdateItem}
+                onCheckBox={handleCheckBox}
+                onDeleteItem={handleDeleteItem}
+                onUpdate={handleUpdate}
+              />
+            )}
           />
-        ) : null}
+        </div>
+        <div>
+          {sideItems.length ? (
+            <DeleteSelected
+              side={sideItems}
+              items={items}
+              handlecheckdelete={handleCheckDelete}
+            />
+          ) : null}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
