@@ -26,3 +26,13 @@
   border: none;
   margin-left: 1rem;
 }
+
+.editInput {
+  width: 18.7rem;
+  padding: 0.5rem 2rem;
+  margin-left: 1rem;
+  margin-right: 5.7rem;
+  outline: none;
+  border: none;
+  border-bottom: 1.5px solid #5c8089;
+}

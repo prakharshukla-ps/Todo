@@ -11,12 +11,19 @@ export default function Home() {
   const [input, setInput] = useState("");
   const [items, setItems] = useState([]);
   const [sideItems, setSideItems] = useState([]);
+  const [updateItem, setUpdateItem] = useState("");
 
   function handleSubmit(e) {
     e.preventDefault();
 
     if (!input) return alert("Enter task");
-    const newItem = { input, id: Date.now(), check: false };
+    const newItem = {
+      input,
+      id: Date.now(),
+      check: false,
+      update: false,
+      clicked: false,
+    };
 
     handleAddItems(newItem);
 
@@ -37,18 +44,29 @@ export default function Home() {
     );
   }
 
-  function handleUpdate(e) {
-    e.target.parentElement.parentElement.parentElement.parentElement.parentElement.previousElementSibling.children[0].focus();
-    console.log(
-      e.target.parentElement.parentElement.parentElement.parentElement
-        .parentElement.previousElementSibling.children[0]
+  function handleUpdate(item, click) {
+    setUpdateItem(item.input);
+
+    setItems((items) =>
+      items.map((it) =>
+        it.id === item.id ? { ...it, update: !it.update } : it
+      )
     );
+
+    if (click && updateItem.length) {
+      setItems((items) =>
+        items.map((it) =>
+          it.id === item.id ? { ...it, input: updateItem } : it
+        )
+      );
+      setUpdateItem("");
+    }
   }
 
   function handleCheckBox(id) {
     setItems((items) =>
       items.map((item) =>
-        item.id === id ? { ...item, check: !item.check } : item
+        item.id === id ? { ...item, check: !item.check, update: false } : item
       )
     );
   }
@@ -99,6 +117,9 @@ export default function Home() {
             <Item
               item={item}
               key={item.id}
+              update={item.update}
+              updateItem={updateItem}
+              setUpdateItem={setUpdateItem}
               onCheckBox={handleCheckBox}
               onDeleteItem={handleDeleteItem}
               onUpdate={handleUpdate}

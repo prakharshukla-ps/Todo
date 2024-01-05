@@ -4,3 +4,11 @@
   border: none;
   margin-left: 1rem;
 }
+
+.editButton {
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  margin-left: -1rem;
+  font-size: 1.5rem;
+}
