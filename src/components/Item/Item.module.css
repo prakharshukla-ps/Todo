@@ -1,9 +1,9 @@
 .item {
   display: flex;
   margin: 1rem;
-  margin-left: -1.2rem;
+  margin-left: -2rem;
   padding: 0rem 1rem;
-  height: 3rem;
+  height: 4rem;
   cursor: pointer;
   align-items: center;
   border-radius: 1rem;
@@ -15,9 +15,24 @@
   box-shadow: 1px 1px 2px 2px rgb(233, 228, 220);
 }
 
-.item span {
-  width: 22rem;
-  margin: 0rem 2rem;
+.itemDate {
+  width: 8rem;
+  margin: 0rem 1rem;
+  overflow-x: scroll;
+}
+
+.itemTitle {
+  width: 10rem;
+  height: 2rem;
+  margin: 0rem 1rem;
+  overflow: scroll;
+}
+
+.itemDescription {
+  width: 20rem;
+  height: 2rem;
+  margin: 0rem 1rem;
+  overflow: scroll;
 }
 
 .item button {
@@ -28,10 +43,18 @@
 }
 
 .editInput {
-  width: 18.7rem;
-  padding: 0.5rem 2rem;
+  width: 12rem;
+  padding: 0.2rem 0.2rem;
+  margin: 0rem 1rem;
+  outline: none;
+  border: none;
+  border-bottom: 1.5px solid #5c8089;
+}
+.editDescription {
+  width: 15rem;
+  padding: 0.3rem 0.5rem;
   margin-left: 1rem;
-  margin-right: 5.7rem;
+  margin-right: 4rem;
   outline: none;
   border: none;
   border-bottom: 1.5px solid #5c8089;

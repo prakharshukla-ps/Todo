@@ -24,3 +24,28 @@
 .delete {
   background-color: #ad454c;
 }
+
+.add {
+  background-color: #5c8089;
+}
+
+.formBtn {
+  cursor: pointer;
+  padding: 1rem;
+  width: 6rem;
+  border-radius: 1rem;
+  border: none;
+  color: #fff;
+  margin-left: 1rem;
+}
+
+.outline {
+  cursor: pointer;
+  padding: 1rem;
+  width: 6rem;
+  border-radius: 1rem;
+  border: 2px solid #5c8089;
+  color: #5c8089;
+  background-color: transparent;
+  margin-left: 1rem;
+}

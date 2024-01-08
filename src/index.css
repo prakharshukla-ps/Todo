@@ -1,12 +1,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Merriweather:wght@300&display=swap");
 
 .container {
-  padding-top: 2rem;
-  width: 40rem;
+  padding: 1rem 1rem;
+  width: 90vw;
   margin: auto;
   font-family: "Merriweather", serif;
   display: grid;
   grid-template-columns: 2fr 1fr;
+}
+
+.display1 {
+  width: 60vw;
 }
 
 .form {
@@ -19,14 +23,4 @@
   margin-left: 1rem;
   width: 1.5rem;
   height: 1.5rem;
-}
-
-.form button {
-  cursor: pointer;
-  padding: 1rem;
-  width: 6rem;
-  border-radius: 1rem;
-  border: none;
-  background-color: #5c8089;
-  color: #fff;
 }

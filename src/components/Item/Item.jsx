@@ -12,14 +12,23 @@ export default function Item({
   onDeleteItem,
   onCheckBox,
   onUpdate,
+  updateDate,
+  setUpdateDate,
+  updateDescription,
+  setUpdateDescription,
   update,
   updateItem,
   setUpdateItem,
 }) {
   return (
     <li className={styles.item}>
-      {update && !item.check ? (
+      {update && !item.check && item.active ? (
         <Edit>
+          <input
+            type="date"
+            value={updateDate}
+            onChange={(e) => setUpdateDate(e.target.value)}
+          />
           <input
             type="text"
             className={styles.editInput}
@@ -33,6 +42,12 @@ export default function Item({
                 ? onUpdate(item)
                 : null
             }
+            placeholder="Enter here..."
+          />
+          <textarea
+            className={styles.editDescription}
+            value={updateDescription}
+            onChange={(e) => setUpdateDescription(e.target.value)}
             placeholder="Enter here..."
           />
           <Button
@@ -52,11 +67,18 @@ export default function Item({
             className="input"
             type="checkbox"
             value={item.check}
+            checked={item.check}
             onChange={() => {
               onCheckBox(item.id);
             }}
           />
-          <span>{item.input}</span>
+
+          <span className={styles.itemDate}>{item.date}</span>
+
+          <span className={styles.itemTitle}>{item.input}</span>
+
+          <span className={styles.itemDescription}>{item.description}</span>
+
           <Button
             btn={<FcEditImage size={30} />}
             btnfunction={() => onUpdate(item)}
