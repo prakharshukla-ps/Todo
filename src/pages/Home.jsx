@@ -7,7 +7,7 @@ import Input from "../components/Input/Input";
 import List from "../components/List/List";
 import Item from "../components/Item/Item";
 import Button from "../components/Button/Button";
-import Text from "./../components/Text/Text";
+import Text from "../components/Text/Text";
 
 import DeleteSelected from "../components/DeleteSelected/DeleteSelected";
 
