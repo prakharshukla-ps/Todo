@@ -1,5 +1,15 @@
+.nav {
+  margin-left: -4rem;
+}
+
 .list {
   list-style: none;
-  padding: 0;
-  margin-bottom: 3rem;
+}
+
+.listAnchor {
+  text-decoration: none;
+  color: #fff;
+  background-color: #5c8089;
+  padding: 1rem;
+  border-radius: 1rem;
 }

@@ -6,7 +6,7 @@ export default function DeleteSelected({ side, handlecheckdelete }) {
     <>
       <div className={styles.side}>
         {side.map((item) => (
-          <p key={item}>{item} </p>
+          <li key={item}>{item} </li>
         ))}
         <Button
           styleClass="deleteSelectedBtn"

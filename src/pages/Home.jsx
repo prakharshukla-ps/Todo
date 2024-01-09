@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -10,6 +10,8 @@ import Button from "../components/Button/Button";
 import Text from "../components/Text/Text";
 
 import DeleteSelected from "../components/DeleteSelected/DeleteSelected";
+import { TodoContext } from "../Context/TodoContext";
+import Tab from "../components/Tab/Tab";
 
 export default function Home() {
   const [isChecked, setIsChecked] = useState(false);
@@ -17,8 +19,9 @@ export default function Home() {
   const [input, setInput] = useState("");
   const [description, setDescription] = useState("");
 
-  const [items, setItems] = useState([]);
-  const [sideItems, setSideItems] = useState([]);
+  const { items, setItems, sideItems, setSideItems } = useContext(TodoContext);
+  // const [items, setItems] = useState([]);
+  // const [sideItems, setSideItems] = useState([]);
 
   const [updateDate, setUpdateDate] = useState("");
   const [updateItem, setUpdateItem] = useState("");
@@ -153,6 +156,7 @@ export default function Home() {
         TODO App
       </Text>
       <div className="container">
+        <Tab />
         <div className="display1">
           <form className="form" onSubmit={handleSubmit}>
             <Input
