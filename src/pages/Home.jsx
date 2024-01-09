@@ -32,7 +32,7 @@ export default function Home() {
     e.preventDefault();
 
     if (!input || !description || !date)
-      return alert("Missing date, title or description");
+      return alert("Missing date1, title or description");
     const newItem = {
       input,
       date,
