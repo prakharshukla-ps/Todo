@@ -3,25 +3,18 @@ import { useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import Input from "../components/Input/Input";
-import List from "../components/List/List";
-import Item from "../components/Item/Item";
-import Button from "../components/Button/Button";
-import Text from "../components/Text/Text";
+import { TodoContext } from "../../Context/TodoContext";
 
-import DeleteSelected from "../components/DeleteSelected/DeleteSelected";
-import { TodoContext } from "../Context/TodoContext";
-import Tab from "../components/Tab/Tab";
+import List from "../../components/List/List";
+import Item from "../../components/Item/Item";
+import Text from "../../components/Text/Text";
+import DeleteSelected from "../../components/DeleteSelected/DeleteSelected";
+import Tab from "../../components/Tab/Tab";
+
+import HomeForm from "./HomeForm";
 
 export default function Home() {
-  const [isChecked, setIsChecked] = useState(false);
-  const [date, setDate] = useState("");
-  const [input, setInput] = useState("");
-  const [description, setDescription] = useState("");
-
   const { items, setItems, sideItems, setSideItems } = useContext(TodoContext);
-  // const [items, setItems] = useState([]);
-  // const [sideItems, setSideItems] = useState([]);
 
   const [updateDate, setUpdateDate] = useState("");
   const [updateItem, setUpdateItem] = useState("");
@@ -31,37 +24,12 @@ export default function Home() {
     toast.error(`${item} already added`);
   }
 
-  function handleSubmit(e) {
-    e.preventDefault();
-
-    if (!input || !description || !date)
-      return alert("Missing date1, title or description");
-    const newItem = {
-      input,
-      date,
-      description,
-      id: Date.now(),
-      check: isChecked,
-      update: false,
-      clicked: false,
-      active: false,
-    };
-
-    handleAddItems(newItem);
-
-    setInput("");
-    setDescription("");
-    setDate("");
-    setIsChecked(false);
-  }
-
   function handleAddItems(item) {
     setItems((items) => {
       if (items.findIndex((el) => el.input === item.input) === -1) {
         items = [item, ...items];
       } else {
         notify(item.input);
-        // console.log(34);
       }
 
       return items;
@@ -153,28 +121,17 @@ export default function Home() {
         size={"2rem"}
         font={"Merriweather"}
       >
-        TODO App
+        TODO
       </Text>
       <div className="container">
         <Tab />
         <div className="display1">
-          <form className="form" onSubmit={handleSubmit}>
-            <Input
-              isChecked={isChecked}
-              handleIsChecked={setIsChecked}
-              date={date}
-              handleDate={setDate}
-              input={input}
-              handleInput={setInput}
-              description={description}
-              handleDescription={setDescription}
-            />
-            <Button btn={"ADD"} styleClass="formBtn" varColor="add" />
-          </form>
+          <HomeForm handleAddItems={handleAddItems} />
           <List
             items={items}
-            renderItem={(item) => (
+            renderItem={(item, index) => (
               <Item
+                index={index}
                 item={item}
                 key={item.id}
                 updateDate={updateDate}

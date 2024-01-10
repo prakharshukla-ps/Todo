@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { TodoProvider } from "./Context/TodoContext";
-import Home from "./pages/Home";
+import Home from "./pages/home/Home";
 import Completed from "./components/Completed/Completed";
 import Remaining from "./components/Remaining/Remaining";
 

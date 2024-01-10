@@ -1,27 +1,19 @@
 @import url("https://fonts.googleapis.com/css2?family=Merriweather:wght@300&display=swap");
 
 .container {
-  padding: 1rem 1rem;
-  width: 90vw;
+  width: 100vw;
   margin: auto;
   font-family: "Merriweather", serif;
   display: grid;
-  grid-template-columns: 0.7fr 2fr 1fr;
+  grid-template-columns: 1fr 2fr 1fr;
 }
 
 .display1 {
-  width: 60vw;
+  width: 65vw;
 }
 
-.form {
+.homeForm {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  margin-bottom: 3rem;
-}
-
-.input {
-  margin-left: 1rem;
-  width: 1.5rem;
-  height: 1.5rem;
 }

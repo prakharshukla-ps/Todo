@@ -52,7 +52,6 @@ export default function TodoProvider({ children }) {
         items = [item, ...items];
       } else {
         notify(item.input);
-        // console.log(34);
       }
 
       return items;

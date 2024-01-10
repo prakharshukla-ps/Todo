@@ -1,13 +1,13 @@
 import Button from "../Button/Button";
 import styles from "./DeleteSelected.module.css";
 
-export default function DeleteSelected({ side, handlecheckdelete }) {
+export default function DeleteSelected({ side, handlecheckdelete, items }) {
   return (
     <>
       <div className={styles.side}>
-        {side.map((item) => (
-          <li key={item}>{item} </li>
-        ))}
+        {items.map((item, i) =>
+          item?.check ? <li key={i}>{item?.input} </li> : <div key={i} />
+        )}
         <Button
           styleClass="deleteSelectedBtn"
           varColor="delete"

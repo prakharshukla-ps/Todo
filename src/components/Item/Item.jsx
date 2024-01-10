@@ -6,6 +6,7 @@ import styles from "./Item.module.css";
 
 import { FcEditImage } from "react-icons/fc";
 import { FcFullTrash } from "react-icons/fc";
+import InputDate from "../InputDate/InputDate";
 
 export default function Item({
   item,
@@ -24,11 +25,12 @@ export default function Item({
     <li className={styles.item}>
       {update && !item.check && item.active ? (
         <Edit>
-          <input
+          <InputDate date={updateDate} handleDate={setUpdateDate} />
+          {/* <input
             type="date"
             value={updateDate}
             onChange={(e) => setUpdateDate(e.target.value)}
-          />
+          /> */}
           <input
             type="text"
             className={styles.editInput}
