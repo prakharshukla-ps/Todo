@@ -1,16 +1,19 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 import InputCheckbox from "../../components/InputCheckbox/InputCheckbox";
 import InputDate from "../../components/InputDate/InputDate";
 import InputText from "../../components/InputText/InputText";
 import InputTextarea from "../../components/InputTextarea/InputTextarea";
 import Button from "../../components/Button/Button";
+import { TodoContext } from "../../Context/TodoContext";
 
-export default function HomeForm({ handleAddItems }) {
+export default function HomeForm() {
   const [isChecked, setIsChecked] = useState(false);
   const [date, setDate] = useState("");
   const [input, setInput] = useState("");
   const [description, setDescription] = useState("");
+
+  const { setItems, notify } = useContext(TodoContext);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -35,6 +38,18 @@ export default function HomeForm({ handleAddItems }) {
     setDescription("");
     setDate("");
     setIsChecked(false);
+  }
+
+  function handleAddItems(item) {
+    setItems((items) => {
+      if (items.findIndex((el) => el.input === item.input) === -1) {
+        items = [item, ...items];
+      } else {
+        notify(item.input);
+      }
+
+      return items;
+    });
   }
 
   return (

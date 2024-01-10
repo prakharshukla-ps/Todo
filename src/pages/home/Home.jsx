@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { useEffect } from "react";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import { TodoContext } from "../../Context/TodoContext";
@@ -18,22 +18,6 @@ export default function Home() {
   const [updateDate, setUpdateDate] = useState("");
   const [updateItem, setUpdateItem] = useState("");
   const [updateDescription, setUpdateDescription] = useState("");
-
-  function notify(item) {
-    toast.error(`${item} already added`);
-  }
-
-  function handleAddItems(item) {
-    setItems((items) => {
-      if (items.findIndex((el) => el.input === item.input) === -1) {
-        items = [item, ...items];
-      } else {
-        notify(item.input);
-      }
-
-      return items;
-    });
-  }
 
   function handleDeleteItem(id) {
     setItems((items) => items.filter((item) => item.id !== id));
@@ -123,7 +107,7 @@ export default function Home() {
 
       <div className="container">
         <div className="display1">
-          <HomeForm handleAddItems={handleAddItems} />
+          <HomeForm />
           <List
             items={items}
             renderItem={(item, index) => (
