@@ -1,26 +1,23 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import styles from "./Tab.module.css";
 
 export default function Tab() {
   return (
-    <>
-      <ul className={styles.list}>
-        <li style={{ marginBottom: "3rem" }}>
-          <Link className={styles.listAnchor} to="/">
-            Home
-          </Link>
+    <div className={styles.tab}>
+      <ul className={`${styles.list} activeLink`}>
+        <li>
+          <NavLink to={`/`}>Home</NavLink>
         </li>
-        <li style={{ marginBottom: "3rem" }}>
-          <Link className={styles.listAnchor} to="remaining">
-            Remaining
-          </Link>
+        <li>
+          <NavLink to={`remaining`}>Remaining</NavLink>
         </li>
-        <li style={{ marginBottom: "3rem" }}>
-          <Link className={styles.listAnchor} to="completed">
-            Completed
-          </Link>
+        <li>
+          <NavLink to={`completed`}>Completed</NavLink>
+        </li>
+        <li>
+          <NavLink to={`all`}>All</NavLink>
         </li>
       </ul>
-    </>
+    </div>
   );
 }

@@ -9,7 +9,6 @@ import List from "../../components/List/List";
 import Item from "../../components/Item/Item";
 import Text from "../../components/Text/Text";
 import DeleteSelected from "../../components/DeleteSelected/DeleteSelected";
-import Tab from "../../components/Tab/Tab";
 
 import HomeForm from "./HomeForm";
 
@@ -111,20 +110,18 @@ export default function Home() {
   }, [items]);
 
   return (
-    <>
-      <div>
-        <ToastContainer />
-      </div>
+    <div className="box">
+      <ToastContainer />
       <Text
         fontColor={"#665743"}
         weight={"bolder"}
         size={"2rem"}
         font={"Merriweather"}
       >
-        TODO
+        TODO APP
       </Text>
+
       <div className="container">
-        <Tab />
         <div className="display1">
           <HomeForm handleAddItems={handleAddItems} />
           <List
@@ -158,6 +155,6 @@ export default function Home() {
           ) : null}
         </div>
       </div>
-    </>
+    </div>
   );
 }

@@ -1,7 +1,6 @@
 .item {
   display: flex;
   margin: 1rem;
-  margin-left: -2rem;
   padding: 0rem 1rem;
   height: 4rem;
   cursor: pointer;

@@ -1,12 +1,12 @@
 import { useContext } from "react";
 import { TodoContext } from "../../Context/TodoContext";
-import Tab from "../Tab/Tab";
+import { Outlet } from "react-router-dom";
 
 export default function Remaining() {
   const { items } = useContext(TodoContext);
   return (
     <div>
-      <Tab />
+      <Outlet />
       <span>Remaining Task :</span>
       <ul style={{ listStyle: "none" }}>
         {items.map((it) => (
