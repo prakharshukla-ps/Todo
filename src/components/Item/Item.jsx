@@ -64,14 +64,20 @@ export default function Item({ item }) {
       {item.update && !item.check && item.active ? (
         <Edit>
           <form onSubmit={(e) => handleUpdateForm(e, true)}>
-            <Input name="updateDate" type="date" />
+            <Input name="updateDate" type="date" defaultValue={item.date} />
             <Input
               place="Enter here..."
               name="updateItem"
               autoFocus={true}
               type="text"
+              defaultValue={item.input}
             />
-            <InputTextarea columns={20} rows={1} name="updateDescription" />
+            <InputTextarea
+              columns={20}
+              rows={1}
+              name="updateDescription"
+              defaultValue={item.description}
+            />
             <Button styleClass="editButton" btn="✅" type="submit" />
             <Button styleClass="editButton" btn="❌" type="submit" />
           </form>
@@ -90,18 +96,15 @@ export default function Item({ item }) {
           <span className={styles.itemDate}>{item.date}</span>
           <span className={styles.itemTitle}>{item.input}</span>
           <span className={styles.itemDescription}>{item.description}</span>
-          {/* {isEditable && ( */}
-          <>
-            <Button
-              btn={<FcEditImage size={30} />}
-              btnfunction={() => handleUpdate()}
-            />
-            <Button
-              btn={<FcFullTrash size={30} />}
-              btnfunction={() => handleDeleteItem(item.id)}
-            />
-          </>
-          {/*) } */}
+
+          <Button
+            btn={<FcEditImage size={30} />}
+            btnfunction={() => handleUpdate()}
+          />
+          <Button
+            btn={<FcFullTrash size={30} />}
+            btnfunction={() => handleDeleteItem(item.id)}
+          />
         </DisplayItem>
       )}
     </li>

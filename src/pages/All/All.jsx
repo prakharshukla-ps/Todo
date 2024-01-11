@@ -10,9 +10,9 @@ export default function All() {
     <div>
       <div className={styles.boxHeading}>All Task :</div>
       <ul className={styles.boxList}>
-        {items.map((item) => {
-          return <Item item={item} key={item.input} />;
-        })}
+        {items.length
+          ? items.map((item) => <Item item={item} key={item.input} />)
+          : "No data available..."}
       </ul>
     </div>
   );

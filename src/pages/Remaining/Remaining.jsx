@@ -1,17 +1,18 @@
 import { useContext } from "react";
+import Item from "../../components/Item/Item";
+import styles from "../All/All.module.css";
 import { TodoContext } from "../../Context/TodoContext";
-import { Outlet } from "react-router-dom";
 
 export default function Remaining() {
   const { items } = useContext(TodoContext);
+
   return (
     <div>
-      <Outlet />
-      <span>Remaining Task :</span>
-      <ul style={{ listStyle: "none" }}>
-        {items.map((it) => (
-          <li key={it.id}>{it.check === false ? it.input : null}</li>
-        ))}
+      <div className={styles.boxHeading}>Remaining Task :</div>
+      <ul className={styles.boxList}>
+        {items.map((item) =>
+          item.check === false ? <Item item={item} key={item.input} /> : null
+        )}
       </ul>
     </div>
   );

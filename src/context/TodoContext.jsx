@@ -6,20 +6,30 @@ const TodoContext = createContext();
 
 function TodoProvider({ children }) {
   const [items, setItems] = useState([]);
-  const [sideItems, setSideItems] = useState([]);
+  // const [sideItems, setSideItems] = useState([]);
 
   function notify(item) {
     toast.error(`${item} already added`);
   }
 
+  // function handleDeleteItem(id) {
+  //   setItems((items) => items.filter((item) => item.id !== id));
+
+  //   items.forEach((item) =>
+  //     setSideItems((sideItems) =>
+  //       sideItems.filter((sideItem) => item.input === sideItem)
+  //     )
+  //   );
+  // }
+
   function handleDeleteItem(id) {
     setItems((items) => items.filter((item) => item.id !== id));
 
-    items.forEach((item) =>
-      setSideItems((sideItems) =>
-        sideItems.filter((sideItem) => item.input === sideItem)
-      )
-    );
+    // items.forEach((item) =>
+    //   setSideItems((sideItems) =>
+    //     sideItems.filter((sideItem) => item.input === sideItem)
+    //   )
+    // );
   }
 
   function handleCheckBox(id) {
@@ -38,8 +48,8 @@ function TodoProvider({ children }) {
         notify,
         items,
         setItems,
-        sideItems,
-        setSideItems,
+        // sideItems,
+        // setSideItems,
         handleCheckBox,
         handleDeleteItem,
       }}

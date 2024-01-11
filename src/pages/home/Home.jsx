@@ -1,9 +1,9 @@
-import { useContext } from "react";
-import { useEffect } from "react";
+// import { useContext } from "react";
+// import { useEffect } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import { TodoContext } from "../../Context/TodoContext";
+// import { TodoContext } from "../../Context/TodoContext";
 
 import List from "../../components/List/List";
 import Item from "../../components/Item/Item";
@@ -13,27 +13,28 @@ import DeleteSelected from "../../components/DeleteSelected/DeleteSelected";
 import HomeForm from "./HomeForm";
 
 export default function Home() {
-  const { items, sideItems, setSideItems } = useContext(TodoContext);
+  // const { items, sideItems, setSideItems } = useContext(TodoContext);
+  // const { items } = useContext(TodoContext);
 
-  useEffect(() => {
-    if (items.length) {
-      items.forEach((item) =>
-        item.check === true
-          ? setSideItems((sideItems) =>
-              !sideItems.includes(item.input)
-                ? [...sideItems, item.input]
-                : sideItems
-            )
-          : setSideItems((sideItems) =>
-              sideItems.length
-                ? sideItems.filter((siitem) => !siitem.includes(item.input))
-                : sideItems
-            )
-      );
-    } else {
-      setSideItems([]);
-    }
-  }, [items]);
+  // useEffect(() => {
+  //   if (items.length) {
+  //     items.forEach((item) =>
+  //       item.check === true
+  //         ? setSideItems((sideItems) =>
+  //             !sideItems.includes(item.input)
+  //               ? [...sideItems, item.input]
+  //               : sideItems
+  //           )
+  //         : setSideItems((sideItems) =>
+  //             sideItems.length
+  //               ? sideItems.filter((siitem) => !siitem.includes(item.input))
+  //               : sideItems
+  //           )
+  //     );
+  //   } else {
+  //     setSideItems([]);
+  //   }
+  // }, [items]);
 
   return (
     <div className="box">
@@ -53,7 +54,8 @@ export default function Home() {
           <List renderItem={(item) => <Item item={item} key={item.id} />} />
         </div>
         <div className="display2">
-          {sideItems.length ? <DeleteSelected /> : null}
+          {/* {sideItems.length ? <DeleteSelected /> : null} */}
+          <DeleteSelected />
         </div>
       </div>
     </div>
