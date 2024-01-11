@@ -8,7 +8,7 @@ export default function List({ renderItem }) {
 
   return (
     <div className={styles.lists}>
-      <ul>{items.map((item) => renderItem(item))}</ul>
+      <ul>{items.map((item, index) => renderItem(item, index))}</ul>
       <Link className={styles.showAllBtn} to={`all`}>
         Show All
       </Link>

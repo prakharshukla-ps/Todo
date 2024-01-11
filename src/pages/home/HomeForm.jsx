@@ -53,18 +53,37 @@ export default function HomeForm() {
     });
   }
 
+  const script = () => {
+    const itemsToAdd = Array(100)
+      .fill("")
+      .map((el, i) => ({
+        isChecked: false,
+        date: "2024-01-11",
+        input: `Test title ${i + 1}`,
+        description: `Test Description ${i + 1}`,
+        id: `Test title ${i + 1}`,
+        update: false,
+        clicked: false,
+        active: false,
+      }));
+    setItems(itemsToAdd);
+  };
+
   return showForm ? (
-    <form className="homeForm" onSubmit={handleSubmit}>
-      <Input styles="homeFormCheck" type="checkbox" name="isChecked" />
-      <Input styles="homeFormDate" type="date" name="date" />
-      <Input
-        styles="homeFormInput"
-        place="Enter here..."
-        type="text"
-        name="input"
-      />
-      <InputTextarea styles="homeFormTextarea" name="description" />
-      <Button btn={"ADD"} styleClass="formBtn" varColor="add" type="submit" />
-    </form>
+    <>
+      <Button btn="aa" btnfunction={script} />
+      <form className="homeForm" onSubmit={handleSubmit}>
+        <Input styles="homeFormCheck" type="checkbox" name="isChecked" />
+        <Input styles="homeFormDate" type="date" name="date" />
+        <Input
+          styles="homeFormInput"
+          place="Enter here..."
+          type="text"
+          name="input"
+        />
+        <InputTextarea styles="homeFormTextarea" name="description" />
+        <Button btn={"ADD"} styleClass="formBtn" varColor="add" type="submit" />
+      </form>
+    </>
   ) : null;
 }

@@ -1,6 +1,4 @@
 import Button from "../Button/Button";
-import DisplayItem from "../DisplayItem/DisplayItem";
-import Edit from "../Edit/Edit";
 
 import InputTextarea from "../InputTextarea/InputTextarea";
 
@@ -12,9 +10,8 @@ import { useContext } from "react";
 import { TodoContext } from "../../Context/TodoContext";
 import Input from "../Input/Input";
 
-export default function Item({ item }) {
-  const { setItems, handleDeleteItem, handleCheckBox } =
-    useContext(TodoContext);
+export default function Item({ item, index }) {
+  const { setItems } = useContext(TodoContext);
 
   function handleUpdateForm(e, click) {
     e.preventDefault();
@@ -49,6 +46,20 @@ export default function Item({ item }) {
     }
   }
 
+  function handleDeleteItem(id) {
+    setItems((items) => items.filter((item) => item.id !== id));
+  }
+
+  function handleCheckBox(id) {
+    setItems((items) =>
+      items.map((it) =>
+        it.id === id
+          ? { ...it, check: !it.check, update: false, active: false }
+          : it
+      )
+    );
+  }
+
   function handleUpdate() {
     setItems((items) =>
       items.map((it) =>
@@ -62,7 +73,7 @@ export default function Item({ item }) {
   return (
     <li className={styles.item}>
       {item.update && !item.check && item.active ? (
-        <Edit>
+        <>
           <form onSubmit={(e) => handleUpdateForm(e, true)}>
             <Input name="updateDate" type="date" defaultValue={item.date} />
             <Input
@@ -81,9 +92,9 @@ export default function Item({ item }) {
             <Button styleClass="editButton" btn="✅" type="submit" />
             <Button styleClass="editButton" btn="❌" type="submit" />
           </form>
-        </Edit>
+        </>
       ) : (
-        <DisplayItem>
+        <>
           <input
             className="input"
             type="checkbox"
@@ -105,7 +116,7 @@ export default function Item({ item }) {
             btn={<FcFullTrash size={30} />}
             btnfunction={() => handleDeleteItem(item.id)}
           />
-        </DisplayItem>
+        </>
       )}
     </li>
   );
