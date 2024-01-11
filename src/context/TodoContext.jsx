@@ -6,7 +6,6 @@ const TodoContext = createContext();
 
 function TodoProvider({ children }) {
   const [items, setItems] = useState([]);
-  // const [id, setId] = useState([]);
 
   function notify(item) {
     toast.error(`${item} already added`);

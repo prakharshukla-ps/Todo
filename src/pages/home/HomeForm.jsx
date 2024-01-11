@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useRef } from "react";
 
 import Input from "../../components/Input/Input";
 import InputTextarea from "../../components/InputTextarea/InputTextarea";
@@ -6,7 +6,7 @@ import Button from "../../components/Button/Button";
 import { TodoContext } from "../../Context/TodoContext";
 
 export default function HomeForm() {
-  const [showForm, setShowForm] = useState(true);
+  const formRef = useRef(null);
 
   const { setItems, notify } = useContext(TodoContext);
 
@@ -17,12 +17,6 @@ export default function HomeForm() {
 
     const { input, description, date, isChecked } =
       Object.fromEntries(homeFormData);
-
-    setShowForm(false);
-
-    setTimeout(() => {
-      setShowForm(true);
-    });
 
     if (!input || !description || !date)
       return alert("Missing date, title or description");
@@ -39,6 +33,8 @@ export default function HomeForm() {
     };
 
     handleAddItems(newItem);
+
+    formRef.current.reset();
   }
 
   function handleAddItems(item) {
@@ -69,10 +65,10 @@ export default function HomeForm() {
     setItems(itemsToAdd);
   };
 
-  return showForm ? (
+  return (
     <>
       <Button btn="aa" btnfunction={script} />
-      <form className="homeForm" onSubmit={handleSubmit}>
+      <form className="homeForm" ref={formRef} onSubmit={handleSubmit}>
         <Input styles="homeFormCheck" type="checkbox" name="isChecked" />
         <Input styles="homeFormDate" type="date" name="date" />
         <Input
@@ -85,5 +81,5 @@ export default function HomeForm() {
         <Button btn={"ADD"} styleClass="formBtn" varColor="add" type="submit" />
       </form>
     </>
-  ) : null;
+  );
 }
