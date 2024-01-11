@@ -1,10 +1,10 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { TodoProvider } from "./Context/TodoContext";
 import Home from "./pages/home/Home";
-import Completed from "./components/Completed/Completed";
-import Remaining from "./components/Remaining/Remaining";
+import Completed from "./pages/Completed/Completed";
+import Remaining from "./pages/Remaining/Remaining";
+import All from "./pages/All/All";
 import Dashboard from "./components/Dashboard/Dashboard";
-import All from "./components/All/All";
 
 const router = createBrowserRouter([
   {

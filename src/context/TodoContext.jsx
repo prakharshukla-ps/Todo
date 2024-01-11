@@ -12,9 +12,37 @@ function TodoProvider({ children }) {
     toast.error(`${item} already added`);
   }
 
+  function handleDeleteItem(id) {
+    setItems((items) => items.filter((item) => item.id !== id));
+
+    items.forEach((item) =>
+      setSideItems((sideItems) =>
+        sideItems.filter((sideItem) => item.input === sideItem)
+      )
+    );
+  }
+
+  function handleCheckBox(id) {
+    setItems((items) =>
+      items.map((it) =>
+        it.id === id
+          ? { ...it, check: !it.check, update: false, active: false }
+          : it
+      )
+    );
+  }
+
   return (
     <TodoContext.Provider
-      value={{ items, setItems, sideItems, setSideItems, notify }}
+      value={{
+        notify,
+        items,
+        setItems,
+        sideItems,
+        setSideItems,
+        handleCheckBox,
+        handleDeleteItem,
+      }}
     >
       {children}
     </TodoContext.Provider>

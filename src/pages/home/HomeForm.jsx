@@ -1,22 +1,28 @@
 import { useContext, useState } from "react";
 
-import InputCheckbox from "../../components/InputCheckbox/InputCheckbox";
-import InputDate from "../../components/InputDate/InputDate";
-import InputText from "../../components/InputText/InputText";
+import Input from "../../components/Input/Input";
 import InputTextarea from "../../components/InputTextarea/InputTextarea";
 import Button from "../../components/Button/Button";
 import { TodoContext } from "../../Context/TodoContext";
 
 export default function HomeForm() {
-  const [isChecked, setIsChecked] = useState(false);
-  const [date, setDate] = useState("");
-  const [input, setInput] = useState("");
-  const [description, setDescription] = useState("");
+  const [showForm, setShowForm] = useState(true);
 
   const { setItems, notify } = useContext(TodoContext);
 
   function handleSubmit(e) {
     e.preventDefault();
+
+    const homeFormData = new FormData(e.target);
+
+    const { input, description, date, isChecked } =
+      Object.fromEntries(homeFormData);
+
+    setShowForm(false);
+
+    setTimeout(() => {
+      setShowForm(true);
+    });
 
     if (!input || !description || !date)
       return alert("Missing date, title or description");
@@ -26,18 +32,13 @@ export default function HomeForm() {
       input,
       date,
       description,
-      check: isChecked,
+      check: isChecked === "on" ? true : false,
       update: false,
       clicked: false,
       active: false,
     };
 
     handleAddItems(newItem);
-
-    setInput("");
-    setDescription("");
-    setDate("");
-    setIsChecked(false);
   }
 
   function handleAddItems(item) {
@@ -52,16 +53,18 @@ export default function HomeForm() {
     });
   }
 
-  return (
+  return showForm ? (
     <form className="homeForm" onSubmit={handleSubmit}>
-      <InputCheckbox isChecked={isChecked} handleIsChecked={setIsChecked} />
-      <InputDate date={date} handleDate={setDate} />
-      <InputText input={input} handleInput={setInput} />
-      <InputTextarea
-        description={description}
-        handleDescription={setDescription}
+      <Input styles="homeFormCheck" type="checkbox" name="isChecked" />
+      <Input styles="homeFormDate" type="date" name="date" />
+      <Input
+        styles="homeFormInput"
+        place="Enter here..."
+        type="text"
+        name="input"
       />
-      <Button btn={"ADD"} styleClass="formBtn" varColor="add" />
+      <InputTextarea styles="homeFormTextarea" name="description" />
+      <Button btn={"ADD"} styleClass="formBtn" varColor="add" type="submit" />
     </form>
-  );
+  ) : null;
 }

@@ -5,8 +5,38 @@
   margin: 0;
 }
 
+.activeLink li a.active {
+  color: #b0181e;
+}
+
 .box {
   width: 85vw;
+}
+
+.homeForm {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 1rem;
+  background-color: antiquewhite;
+  margin-bottom: 1rem;
+}
+
+.homeFormCheck {
+  height: 1.5rem;
+  width: 1.5rem;
+}
+
+.homeFormDate {
+  padding: 0.3rem;
+}
+
+.homeFormInput {
+  width: 15rem;
+  height: 1.5rem;
+  padding: 0.5rem 0.5rem;
+  border: 2px solid #5c8089;
+  border-radius: 1rem;
 }
 
 .container {
@@ -15,16 +45,6 @@
   font-family: "Merriweather", serif;
 }
 
-.activeLink li a.active {
-  color: #b0181e;
-}
-
 .display1 {
   width: 60vw;
-}
-
-.homeForm {
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
 }

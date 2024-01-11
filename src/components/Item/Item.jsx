@@ -2,66 +2,79 @@ import Button from "../Button/Button";
 import DisplayItem from "../DisplayItem/DisplayItem";
 import Edit from "../Edit/Edit";
 
+import InputTextarea from "../InputTextarea/InputTextarea";
+
 import styles from "./Item.module.css";
 
 import { FcEditImage } from "react-icons/fc";
 import { FcFullTrash } from "react-icons/fc";
-import InputDate from "../InputDate/InputDate";
+import { useContext } from "react";
+import { TodoContext } from "../../Context/TodoContext";
+import Input from "../Input/Input";
 
-export default function Item({
-  item,
-  onDeleteItem,
-  onCheckBox,
-  onUpdate,
-  updateDate,
-  setUpdateDate,
-  updateDescription,
-  setUpdateDescription,
-  update,
-  updateItem,
-  setUpdateItem,
-}) {
+export default function Item({ item }) {
+  const { setItems, handleDeleteItem, handleCheckBox } =
+    useContext(TodoContext);
+
+  function handleUpdateForm(e, click) {
+    e.preventDefault();
+
+    const updateFormData = new FormData(e.target);
+    const { updateDate, updateItem, updateDescription } =
+      Object.fromEntries(updateFormData);
+
+    setItems((items) =>
+      items.map((it) =>
+        it.id === item.id
+          ? { ...it, update: !it.update, active: !it.active }
+          : { ...it, update: false, active: false }
+      )
+    );
+
+    if (click) {
+      setItems((items) =>
+        items.map((it) =>
+          it.id === item.id
+            ? {
+                ...it,
+                input: updateItem.length ? updateItem : it.input,
+                date: updateDate.length ? updateDate : it.date,
+                description: updateDescription.length
+                  ? updateDescription
+                  : it.description,
+              }
+            : it
+        )
+      );
+    }
+  }
+
+  function handleUpdate() {
+    setItems((items) =>
+      items.map((it) =>
+        it.id === item.id
+          ? { ...it, update: !it.update, active: !it.active }
+          : { ...it, update: false, active: false }
+      )
+    );
+  }
+
   return (
     <li className={styles.item}>
-      {update && !item.check && item.active ? (
+      {item.update && !item.check && item.active ? (
         <Edit>
-          <InputDate date={updateDate} handleDate={setUpdateDate} />
-          {/* <input
-            type="date"
-            value={updateDate}
-            onChange={(e) => setUpdateDate(e.target.value)}
-          /> */}
-          <input
-            type="text"
-            className={styles.editInput}
-            value={updateItem}
-            autoFocus={true}
-            onChange={(e) => setUpdateItem(e.target.value)}
-            onKeyDown={(e) =>
-              e.key === "Enter"
-                ? onUpdate(item, true)
-                : e.key === "Escape"
-                ? onUpdate(item)
-                : null
-            }
-            placeholder="Enter here..."
-          />
-          <textarea
-            className={styles.editDescription}
-            value={updateDescription}
-            onChange={(e) => setUpdateDescription(e.target.value)}
-            placeholder="Enter here..."
-          />
-          <Button
-            styleClass="editButton"
-            btn="✅"
-            btnfunction={() => onUpdate(item, true)}
-          />
-          <Button
-            styleClass="editButton"
-            btn="❌"
-            btnfunction={() => onUpdate(item)}
-          />
+          <form onSubmit={(e) => handleUpdateForm(e, true)}>
+            <Input name="updateDate" type="date" />
+            <Input
+              place="Enter here..."
+              name="updateItem"
+              autoFocus={true}
+              type="text"
+            />
+            <InputTextarea columns={20} rows={1} name="updateDescription" />
+            <Button styleClass="editButton" btn="✅" type="submit" />
+            <Button styleClass="editButton" btn="❌" type="submit" />
+          </form>
         </Edit>
       ) : (
         <DisplayItem>
@@ -71,24 +84,24 @@ export default function Item({
             value={item.check}
             checked={item.check}
             onChange={() => {
-              onCheckBox(item.id);
+              handleCheckBox(item.id);
             }}
           />
-
           <span className={styles.itemDate}>{item.date}</span>
-
           <span className={styles.itemTitle}>{item.input}</span>
-
           <span className={styles.itemDescription}>{item.description}</span>
-
-          <Button
-            btn={<FcEditImage size={30} />}
-            btnfunction={() => onUpdate(item)}
-          />
-          <Button
-            btn={<FcFullTrash size={30} />}
-            btnfunction={() => onDeleteItem(item.id)}
-          />
+          {/* {isEditable && ( */}
+          <>
+            <Button
+              btn={<FcEditImage size={30} />}
+              btnfunction={() => handleUpdate()}
+            />
+            <Button
+              btn={<FcFullTrash size={30} />}
+              btnfunction={() => handleDeleteItem(item.id)}
+            />
+          </>
+          {/*) } */}
         </DisplayItem>
       )}
     </li>

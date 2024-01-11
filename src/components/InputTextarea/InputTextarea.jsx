@@ -1,19 +1,16 @@
-import styles from "./InputTextarea.module.css";
-
 export default function InputTextarea({
   rows = 5,
-  columns = 30,
-  description,
-  handleDescription,
+  columns = 40,
+  styles,
+  ...rest
 }) {
   return (
     <textarea
-      className={styles.textarea}
+      className={styles}
       placeholder="Enter details here..."
       cols={columns}
       rows={rows}
-      value={description}
-      onChange={(e) => handleDescription(e.target.value)}
+      {...rest}
     />
   );
 }
