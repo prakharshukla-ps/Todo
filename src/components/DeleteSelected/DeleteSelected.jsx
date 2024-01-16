@@ -1,20 +1,27 @@
-import { useContext } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setItems } from "../../store/reducer/appReducer";
 import Button from "../Button/Button";
 import styles from "./DeleteSelected.module.css";
-import { TodoContext } from "../../Context/TodoContext";
 
 export default function DeleteSelected() {
-  const { items, setItems } = useContext(TodoContext);
+  const { items } = useSelector((state) => state.appReducer);
+
+  const dispatch = useDispatch();
+
+  // function handleCheckDelete() {
+  //   dispatch(setItems((items) => items.filter((item) => !item.check)));
+  // }
 
   function handleCheckDelete() {
-    setItems((items) => items.filter((item) => !item.check));
+    const afterDeletion = items.filter((item) => !item.isChecked);
+    dispatch(setItems(afterDeletion));
   }
 
   return (
     <>
       <div className={styles.side}>
         {items.map((item, i) =>
-          item.check ? <li key={i}>{item.input} </li> : null
+          item.isChecked ? <li key={i}>{item.input} </li> : null
         )}
 
         <Button

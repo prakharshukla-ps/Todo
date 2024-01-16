@@ -1,17 +1,33 @@
-import { useContext } from "react";
+// import { useContext } from "react";
+import { useState } from "react";
 import Item from "../../components/Item/Item";
 import styles from "../All/All.module.css";
-import { TodoContext } from "../../Context/TodoContext";
+// import { TodoContext } from "../../Context/TodoContext";
+import { useSelector } from "react-redux";
 
 export default function Remaining() {
-  const { items } = useContext(TodoContext);
+  // const { items } = useContext(TodoContext);
+  const { items } = useSelector((state) => state.appReducer);
+  const [editableIndex, setEditableIndex] = useState(null);
+
+  const onUpdateClick = (index) => {
+    setEditableIndex(index);
+  };
 
   return (
     <div>
       <div className={styles.boxHeading}>Remaining Task :</div>
       <ul className={styles.boxList}>
-        {items.map((item) =>
-          item.check === false ? <Item item={item} key={item.input} /> : null
+        {items.map((item, index) =>
+          item.isChecked === false ? (
+            <Item
+              item={item}
+              key={item.input}
+              index={index}
+              isEditable={index === editableIndex}
+              onUpdateClick={onUpdateClick}
+            />
+          ) : null
         )}
       </ul>
     </div>

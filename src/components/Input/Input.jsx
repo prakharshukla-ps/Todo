@@ -1,4 +1,4 @@
-export default function Input({ styles, place, isChecked = null, ...rest }) {
+export default function Input({ styles, place, isChecked, ...rest }) {
   return (
     <input
       className={styles}

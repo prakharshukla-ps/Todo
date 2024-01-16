@@ -26,3 +26,12 @@
 .list li a:hover {
   color: #3d5264cc;
 }
+
+.logout {
+  cursor: pointer;
+  padding: 1rem 1.5rem;
+  border-radius: 1rem;
+  border: none;
+  background-color: #ad454c;
+  color: #fff;
+}

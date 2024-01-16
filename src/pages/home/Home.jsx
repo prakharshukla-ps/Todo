@@ -7,8 +7,15 @@ import List from "../../components/List/List";
 import Text from "../../components/Text/Text";
 
 import HomeForm from "./HomeForm";
+import { useState } from "react";
 
 export default function Home() {
+  const [editableIndex, setEditableIndex] = useState(null);
+
+  const onUpdateClick = (index) => {
+    setEditableIndex(index);
+  };
+
   return (
     <div className="box">
       <ToastContainer />
@@ -26,7 +33,13 @@ export default function Home() {
         <div className="display1">
           <List
             renderItem={(item, index) => (
-              <Item index={index} item={item} key={item.id} />
+              <Item
+                index={index}
+                item={item}
+                key={index}
+                isEditable={index === editableIndex}
+                onUpdateClick={onUpdateClick}
+              />
             )}
           />
         </div>

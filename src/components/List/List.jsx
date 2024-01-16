@@ -1,14 +1,17 @@
-import { useContext } from "react";
 import styles from "./List.module.css";
-import { TodoContext } from "../../Context/TodoContext";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-export default function List({ renderItem }) {
-  const { items } = useContext(TodoContext);
+export default function List({ renderItem, index }) {
+  const { items } = useSelector((state) => state.appReducer);
 
   return (
     <div className={styles.lists}>
-      <ul>{items.map((item, index) => renderItem(item, index))}</ul>
+      <ul>
+        {items.map((item, index) => {
+          return renderItem(item, index);
+        })}
+      </ul>
       <Link className={styles.showAllBtn} to={`all`}>
         Show All
       </Link>

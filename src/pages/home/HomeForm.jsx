@@ -1,22 +1,29 @@
-import { useContext, useRef } from "react";
+// import { useContext, useRef } from "react";
+import { useRef } from "react";
 
 import Input from "../../components/Input/Input";
 import InputTextarea from "../../components/InputTextarea/InputTextarea";
 import Button from "../../components/Button/Button";
-import { TodoContext } from "../../Context/TodoContext";
+// import { TodoContext } from "../../Context/TodoContext";
+
+import { useDispatch, useSelector } from "react-redux";
+import { setItems } from "../../store/reducer/appReducer";
 
 export default function HomeForm() {
   const formRef = useRef(null);
 
-  const { setItems, notify } = useContext(TodoContext);
+  const { items } = useSelector((state) => state.appReducer);
+
+  const dispatch = useDispatch();
+
+  // const { setItems, notify } = useContext(TodoContext);
 
   function handleSubmit(e) {
     e.preventDefault();
 
-    const homeFormData = new FormData(e.target);
+    const values = Object.fromEntries(new FormData(e.target));
 
-    const { input, description, date, isChecked } =
-      Object.fromEntries(homeFormData);
+    const { input, description, date, isChecked } = values;
 
     if (!input || !description || !date)
       return alert("Missing date, title or description");
@@ -26,28 +33,17 @@ export default function HomeForm() {
       input,
       date,
       description,
-      check: isChecked === "on" ? true : false,
-      update: false,
-      clicked: false,
-      active: false,
+      isChecked: isChecked === "on" ? true : false,
     };
-
-    handleAddItems(newItem);
+    // handleAddItems(newItem);
+    dispatch(setItems([newItem, ...items]));
 
     formRef.current.reset();
   }
 
-  function handleAddItems(item) {
-    setItems((items) => {
-      if (items.findIndex((el) => el.input === item.input) === -1) {
-        items = [item, ...items];
-      } else {
-        notify(item.input);
-      }
-
-      return items;
-    });
-  }
+  // function handleAddItems(item) {
+  //   dispatch(setItems(item));
+  // }
 
   const script = () => {
     const itemsToAdd = Array(100)
@@ -58,11 +54,8 @@ export default function HomeForm() {
         input: `Test title ${i + 1}`,
         description: `Test Description ${i + 1}`,
         id: `Test title ${i + 1}`,
-        update: false,
-        clicked: false,
-        active: false,
       }));
-    setItems(itemsToAdd);
+    dispatch(setItems(itemsToAdd));
   };
 
   return (
